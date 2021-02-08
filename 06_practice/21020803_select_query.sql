@@ -119,12 +119,12 @@ group by userID;
   select max(height) as '큰키'
 	from userTbl;
 
- -- 
+ -- 집계함수 + 다른컬럼까지 출력할 경우 group by 사용
   select userID, userName, min(height) as '작은키', max(height) as '큰키'
 	from userTbl
 group by userID, userName;
 
-  select userID, userName, height
+  select userID, userName, height -- 키가 제일 큰 사람과 제일 작은 사람 출력
 	from userTbl
    where height = (select min(height) from userTbl)
 	  or height = (select max(height) from userTbl)
@@ -132,3 +132,16 @@ group by userID, userName;
  -- 총 데이터 개수
  select COUNT(*) as '회원수' from userTbl; -- 10
  select COUNT(*) as '구매내역수'from buyTbl; -- 12
+
+  -- 잘못된 필터링
+  select userID, sum(price * amount) as '전체 구매금액'
+	from buyTbl
+ -- where sum(price * amount) > 1000
+group by userID
+  having sum(price * amount) > 1000
+order by sum(price * amount) desc;
+
+ -- rollup / cube
+  select num, groupName, sum(price * amount) as '구매금액'
+	from buyTbl
+group by rollup(groupName, num);
