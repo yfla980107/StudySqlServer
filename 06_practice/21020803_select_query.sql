@@ -1,23 +1,23 @@
-use sqlDB;
+ï»¿use sqlDB;
 go
 
- -- ÀÌ¸§ÀÌ ±è°æÈ£ÀÎ »ç¶÷ Á¶È¸
+ -- ì´ë¦„ì´ ê¹€ê²½í˜¸ì¸ ì‚¬ëŒ ì¡°íšŒ
   select * from userTbl
-   where userName = '±è°æÈ£';
+   where userName = 'ê¹€ê²½í˜¸';
 
- -- 1970³â ÀÌÈÄ Ãâ»ıÀÌ°í Å° 182 ÀÌ»óÀÎ »ç¶÷ ¾ÆÀÌµğ, ÀÌ¸§¸¸ Á¶È¸
+ -- 1970ë…„ ì´í›„ ì¶œìƒì´ê³  í‚¤ 182 ì´ìƒì¸ ì‚¬ëŒ ì•„ì´ë””, ì´ë¦„ë§Œ ì¡°íšŒ
   select userID, userName, height
 	from userTbl
    where birthYear >= 1970
 	and height >= 182;
 
- -- 1970³â ÀÌÈÄ Ãâ»ıÀÌ°Å³ª Å°°¡ 182ÀÌ»óÀÌ°Å³ª ÀÎ »ç¶÷µé ¸ğµÎ
+ -- 1970ë…„ ì´í›„ ì¶œìƒì´ê±°ë‚˜ í‚¤ê°€ 182ì´ìƒì´ê±°ë‚˜ ì¸ ì‚¬ëŒë“¤ ëª¨ë‘
   select userID, userName, height
 	from userTbl
    where birthYear >= 1970
 	or height >= 182;
 
- -- Å°°¡ 180~183ÀÎ »ç¶÷¸¸ Á¶È¸
+ -- í‚¤ê°€ 180~183ì¸ ì‚¬ëŒë§Œ ì¡°íšŒ
   select userID, userName, height
 	from userTbl
    where height >= 180
@@ -28,76 +28,76 @@ go
 	from userTbl
    where height between 180 and 183;
 
- -- Áö¿ªÀÌ °æ³², Àü³², °æºÏ
+ -- ì§€ì—­ì´ ê²½ë‚¨, ì „ë‚¨, ê²½ë¶
   select userID, userName, addr
 	from userTbl
-   where addr = '°æ³²'
-	  or addr = 'Àü³²'
-	  or addr = '°æºÏ';
+   where addr = 'ê²½ë‚¨'
+	  or addr = 'ì „ë‚¨'
+	  or addr = 'ê²½ë¶';
 
   select userID, userName, addr
 	from userTbl
-   where addr in ('°æ³²', 'Àü³²', '°æºÏ');
+   where addr in ('ê²½ë‚¨', 'ì „ë‚¨', 'ê²½ë¶');
 
  -- like
   select userID, userName, addr
 	from userTbl
-   where userName like '±è%';
+   where userName like 'ê¹€%';
 
   select userID, userName, addr
 	from userTbl
-   where userName like '_Á¾½Å';
+   where userName like '_ì¢…ì‹ ';
 
  -- SUBQUERY
   select userName, height
 	from userTbl
    where height > 177;
 
-  select userName, height --¼­ºêÄõ¸®
+  select userName, height --ì„œë¸Œì¿¼ë¦¬
 	from userTbl
    where height > 
-		 (select height from userTbl where userName = '±è°æÈ£');
+		 (select height from userTbl where userName = 'ê¹€ê²½í˜¸');
 
-  select userName, height -- any ¼·Äõ¸® °á°úÁß ÇÏ³ª¸¸ ¸¸Á·(and ºñ½Á)
+  select userName, height -- any ì„­ì¿¼ë¦¬ ê²°ê³¼ì¤‘ í•˜ë‚˜ë§Œ ë§Œì¡±(and ë¹„ìŠ·)
 	from userTbl
    where height >= any
-		 (select height from userTbl where addr = '°æ³²');
+		 (select height from userTbl where addr = 'ê²½ë‚¨');
 
-  select userName, height -- all ¼·Äõ¸® °á°úÁß ¸ğµÎ ¸¸Á· (or¶û ºñ½Á)
+  select userName, height -- all ì„­ì¿¼ë¦¬ ê²°ê³¼ì¤‘ ëª¨ë‘ ë§Œì¡± (orë‘ ë¹„ìŠ·)
 	from userTbl
    where height >= all
-		 (select height from userTbl where addr = '°æ³²');
+		 (select height from userTbl where addr = 'ê²½ë‚¨');
 
-  select userName, height -- ¼­ºêÄõ¸®¿¡¼­ in »ç¿ë°¡´É
+  select userName, height -- ì„œë¸Œì¿¼ë¦¬ì—ì„œ in ì‚¬ìš©ê°€ëŠ¥
 	from userTbl
    where height in
-		 (select height from userTbl where addr = '°æ³²');
+		 (select height from userTbl where addr = 'ê²½ë‚¨');
 
 
- -- order by Á¤·Ä 
+ -- order by ì •ë ¬ 
   select userName, mDate
 	from userTbl
-order by mDate asc;  -- ±âº»°ªÀº (asc)¿À¸§Â÷¼ø=»ı·«°¡´É, (desc)³»¸²Â÷¼ø
+order by mDate asc;  -- ê¸°ë³¸ê°’ì€ (asc)ì˜¤ë¦„ì°¨ìˆœ=ìƒëµê°€ëŠ¥, (desc)ë‚´ë¦¼ì°¨ìˆœ
 
   select *
 	from userTbl
 order by userID desc;
 
- -- distinct Áßº¹°ª
+ -- distinct ì¤‘ë³µê°’
   select distinct addr
 	from userTbl;
 
-  select top(5) * -- top Á¦ÀÏ À§¿¡°ª 5°³¸¸ Ãâ·Â
+  select top(5) * -- top ì œì¼ ìœ„ì—ê°’ 5ê°œë§Œ ì¶œë ¥
 	from userTbl
 order by mDate desc;
 
- -- offset ¾Õ¼± °¹¼ö¸¸Å­ ¶Ù¾î³ÑÀº ÈÄ Á¶È¸
+ -- offset ì•ì„  ê°¯ìˆ˜ë§Œí¼ ë›°ì–´ë„˜ì€ í›„ ì¡°íšŒ
   select userID, userName, birthYear
 	from userTbl
 order by birthYear
   offset 4 rows;
 
- -- º¹»ç (ÀÌ¹Ì ÀÖ´Â Å×ÀÌºí¿¡ ÇÏ¸é ¾ÈµÊ, Å×ÀÌºí»ı¼º ¹× ³»¿ë º¹»ç ´Ü, PK´Â º¹»ç ¾ÈµÊ)
+ -- ë³µì‚¬ (ì´ë¯¸ ìˆëŠ” í…Œì´ë¸”ì— í•˜ë©´ ì•ˆë¨, í…Œì´ë¸”ìƒì„± ë° ë‚´ìš© ë³µì‚¬ ë‹¨, PKëŠ” ë³µì‚¬ ì•ˆë¨)
  select * into buyTbl2 from buyTbl;
  select userID, prodName into buyTbl3 from buyTbl;
 
@@ -108,33 +108,33 @@ order by birthYear
 	from buyTbl
 order by userID;
 
-  select userID, sum(amount) as 'ÇÕ°è' -- Áı°èÇÔ¼ö´Â ¼ıÀÚµ¥ÀÌÅÍ¸¸ °¡´É
+  select userID, sum(amount) as 'í•©ê³„' -- ì§‘ê³„í•¨ìˆ˜ëŠ” ìˆ«ìë°ì´í„°ë§Œ ê°€ëŠ¥
 	from buyTbl
 group by userID;
 
  -- min, max
-  select min(height) as 'ÀÛÀºÅ°'
+  select min(height) as 'ì‘ì€í‚¤'
 	from userTbl;
 
-  select max(height) as 'Å«Å°'
+  select max(height) as 'í°í‚¤'
 	from userTbl;
 
- -- Áı°èÇÔ¼ö + ´Ù¸¥ÄÃ·³±îÁö Ãâ·ÂÇÒ °æ¿ì group by »ç¿ë
-  select userID, userName, min(height) as 'ÀÛÀºÅ°', max(height) as 'Å«Å°'
+ -- ì§‘ê³„í•¨ìˆ˜ + ë‹¤ë¥¸ì»¬ëŸ¼ê¹Œì§€ ì¶œë ¥í•  ê²½ìš° group by ì‚¬ìš©
+  select userID, userName, min(height) as 'ì‘ì€í‚¤', max(height) as 'í°í‚¤'
 	from userTbl
 group by userID, userName;
 
-  select userID, userName, height -- Å°°¡ Á¦ÀÏ Å« »ç¶÷°ú Á¦ÀÏ ÀÛÀº »ç¶÷ Ãâ·Â
+  select userID, userName, height -- í‚¤ê°€ ì œì¼ í° ì‚¬ëŒê³¼ ì œì¼ ì‘ì€ ì‚¬ëŒ ì¶œë ¥
 	from userTbl
    where height = (select min(height) from userTbl)
 	  or height = (select max(height) from userTbl)
 
- -- ÃÑ µ¥ÀÌÅÍ °³¼ö
- select COUNT(*) as 'È¸¿ø¼ö' from userTbl; -- 10
- select COUNT(*) as '±¸¸Å³»¿ª¼ö'from buyTbl; -- 12
+ -- ì´ ë°ì´í„° ê°œìˆ˜
+ select COUNT(*) as 'íšŒì›ìˆ˜' from userTbl; -- 10
+ select COUNT(*) as 'êµ¬ë§¤ë‚´ì—­ìˆ˜'from buyTbl; -- 12
 
-  -- Àß¸øµÈ ÇÊÅÍ¸µ
-  select userID, sum(price * amount) as 'ÀüÃ¼ ±¸¸Å±İ¾×'
+  -- ì˜ëª»ëœ í•„í„°ë§
+  select userID, sum(price * amount) as 'ì „ì²´ êµ¬ë§¤ê¸ˆì•¡'
 	from buyTbl
 
  -- where sum(price * amount) > 1000
@@ -143,21 +143,21 @@ group by userID
 order by sum(price * amount) desc;
 
  -- rollup / cube
-  select num, groupName, sum(price * amount) as '±¸¸Å±İ¾×',
+  select num, groupName, sum(price * amount) as 'êµ¬ë§¤ê¸ˆì•¡',
 		GROUPING_ID(groupName, num)
 	from buyTbl
 group by rollup(groupName,num);
 
- -- userID, groupName °¡Áö°í cube ´ÙÂ÷¿ø ÇÕ°è
-  select userID, groupName, sum(price * amount) as '±¸¸Å±İ¾×'
+ -- userID, groupName ê°€ì§€ê³  cube ë‹¤ì°¨ì› í•©ê³„
+  select userID, groupName, sum(price * amount) as 'êµ¬ë§¤ê¸ˆì•¡'
 	from buyTbl
 group by cube(groupName, userID);
 
-  select userID, sum(price * amount) as '±¸¸Å±İ¾×'
+  select userID, sum(price * amount) as 'êµ¬ë§¤ê¸ˆì•¡'
 	from buyTbl
 group by rollup(userID);
 
-  select groupName, sum(price * amount) as '±¸¸Å±İ¾×'
+  select groupName, sum(price * amount) as 'êµ¬ë§¤ê¸ˆì•¡'
 	from buyTbl
 group by cube(groupName);
 
