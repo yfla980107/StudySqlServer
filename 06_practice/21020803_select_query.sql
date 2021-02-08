@@ -136,12 +136,42 @@ group by userID, userName;
   -- 잘못된 필터링
   select userID, sum(price * amount) as '전체 구매금액'
 	from buyTbl
+
  -- where sum(price * amount) > 1000
 group by userID
   having sum(price * amount) > 1000
 order by sum(price * amount) desc;
 
  -- rollup / cube
-  select num, groupName, sum(price * amount) as '구매금액'
+  select num, groupName, sum(price * amount) as '구매금액',
+		GROUPING_ID(groupName, num)
 	from buyTbl
-group by rollup(groupName, num);
+group by rollup(groupName,num);
+
+ -- userID, groupName 가지고 cube 다차원 합계
+  select userID, groupName, sum(price * amount) as '구매금액'
+	from buyTbl
+group by cube(groupName, userID);
+
+  select userID, sum(price * amount) as '구매금액'
+	from buyTbl
+group by rollup(userID);
+
+  select groupName, sum(price * amount) as '구매금액'
+	from buyTbl
+group by cube(groupName);
+
+
+ --without CTE
+  select userID, sum(price * amount) as 'total'
+	from buyTbl
+group by userID
+order by sum(price * amount) desc;
+
+ --with CTE
+with cte_tmp(userID, total)
+as
+( select userID, sum(price * amount) as 'total'
+	from buyTbl
+group by userID )
+select * from cte_tmp order by total desc;
