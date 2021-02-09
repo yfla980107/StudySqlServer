@@ -1,4 +1,4 @@
--- Å×ÀÌºí 3°³ OUTER JOIN
+ï»¿-- í…Œì´ë¸” 3ê°œ OUTER JOIN
 select * 
   from stdTbl as s
   left outer join clubRegTbl as r
