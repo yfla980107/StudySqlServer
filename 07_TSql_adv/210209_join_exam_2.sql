@@ -1,8 +1,8 @@
-use sqlDB;
+ï»¿use sqlDB;
 go
 
--- ÁÖ¼Ò ÆÄÆ¼¼Çº°·Î ³ª´²¼­ ³»¸²Â÷¼øÀ¸·Î Å° ±¸ºĞ ÈÄ ¼øÀ§ ¸Å±è
-select rank() over(partition by addr order by height desc) as 'Å°Å«¼øÀ§',
+-- ì£¼ì†Œ íŒŒí‹°ì…˜ë³„ë¡œ ë‚˜ëˆ ì„œ ë‚´ë¦¼ì°¨ìˆœìœ¼ë¡œ í‚¤ êµ¬ë¶„ í›„ ìˆœìœ„ ë§¤ê¹€
+select rank() over(partition by addr order by height desc) as 'í‚¤í°ìˆœìœ„',
 	   userName, addr, height
   from userTbl;
 
@@ -15,25 +15,25 @@ create table pivotTBL
 	amount int
 );
 
-insert into pivotTBL values ('±è¹ü¼ö', '°Ü¿ï', 10),
-							('À±Á¾½Å', '¿©¸§', 15),
-							('±è¹ü¼ö', '°¡À»', 25),
-							('±è¹ü¼ö', 'º½', 3),
-							('±è¹ü¼ö', 'º½', 37),
-							('À±Á¾½Å', '°Ü¿ï', 40),
-							('±è¹ü¼ö', '¿©¸§', 14),
-							('±è¹ü¼ö', '°Ü¿ï', 22),
-							('À±Á¾½Å', '¿©¸§', 64);
+insert into pivotTBL values ('ê¹€ë²”ìˆ˜', 'ê²¨ìš¸', 10),
+							('ìœ¤ì¢…ì‹ ', 'ì—¬ë¦„', 15),
+							('ê¹€ë²”ìˆ˜', 'ê°€ì„', 25),
+							('ê¹€ë²”ìˆ˜', 'ë´„', 3),
+							('ê¹€ë²”ìˆ˜', 'ë´„', 37),
+							('ìœ¤ì¢…ì‹ ', 'ê²¨ìš¸', 40),
+							('ê¹€ë²”ìˆ˜', 'ì—¬ë¦„', 14),
+							('ê¹€ë²”ìˆ˜', 'ê²¨ìš¸', 22),
+							('ìœ¤ì¢…ì‹ ', 'ì—¬ë¦„', 64);
 go
 */
 
-insert into pivotTBL values ('¼º½Ã°æ', '¿©¸§', 30);
+insert into pivotTBL values ('ì„±ì‹œê²½', 'ì—¬ë¦„', 30);
 select * from pivotTBL;
 
 select * from pivotTBL
  pivot (sum(amount)
 		for season
-		in ([º½], [¿©¸§], [°¡À»], [°Ü¿ï])) as resultPivot;
+		in ([ë´„], [ì—¬ë¦„], [ê°€ì„], [ê²¨ìš¸])) as resultPivot;
 
 -- json
 select userID, userName, addr, height
