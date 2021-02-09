@@ -73,3 +73,30 @@ select concat('Micrsoft ','SQL ', 'Server ', 2019);
 select CHARINDEX('Server', 'SQL Server 2019');
 -- left, right
 select left('SQL Server 2019', 3), right('SQL Server 2019', 4);
+-- substring (지정한 위치부터 지정한 개수의 문자를 리턴)
+select SUBSTRING('Hello World!', 7, 5);
+select SUBSTRING('안녕하세요, SQL서버입니다!', 11, 2);
+-- len (문자열 길이 리턴, 공백무시)
+select len('안녕하세요'), len('Hello World!');
+select len('안녕하세요'), len('Hello World!     ');
+-- lower, upper (low 소>대, up 대>소)
+select lower('abcdeFG'), upper('abcdeFG');
+-- ltrim(뒷여백무시), rtrim
+select len(ltrim('   Hello World!   ')),
+	   len(rtrim('   Hello World!   ')),
+ 	   len (trim('   Hello World!   '));
+
+
+-- replace (원하는 값 변환해줌)
+select replace('(2016년 발표)SQL Server 2016', '2016', '2019');
+
+-- 정말정말정말정말 정말 많이 쓰는 함수
+select format(getdate(), ''); --기본
+select format(getdate(), 'dd/mm/yyyy');
+select format(getdate(), 'yyyy-MM-dd hh:mm:ss:ms');
+select format(getdate(), 'yyyy-MM-dd');
+select format(getdate(), 'hh:mm:ss');
+select format(getdate(), '');
+select format(getdate(), '');
+select format(getdate(), '');
+select format(getdate(), '');
