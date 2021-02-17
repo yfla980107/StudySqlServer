@@ -1,2 +1,2 @@
 # StudySqlServer
-<p> SQL Server query </p>
+<p> Microsoft SQL Server query study </p>
