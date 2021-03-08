@@ -11,7 +11,7 @@
 - [커서](https://github.com/yfla980107/StudySqlServer/tree/main/12_cursor)
 - [트리거](https://github.com/yfla980107/StudySqlServer/tree/main/13_trigger)
 - [XML](https://github.com/yfla980107/StudySqlServer/tree/main/15_xml)
----
+___
 - [Praction](https://github.com/yfla980107/StudySqlServer/tree/main/16_practice)
----
+___
 - [Test](https://github.com/yfla980107/StudySqlServer/tree/main/17_Test)
